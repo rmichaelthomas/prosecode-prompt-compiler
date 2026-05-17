@@ -24,6 +24,7 @@ REQUIRED_FILES = [
     "assets/live-eval-results.json",
     "scripts/validate-skill.py",
     "scripts/benchmark-prompts.py",
+    "scripts/token-discipline-check.py",
     "scripts/install-check.py",
 ]
 
@@ -95,7 +96,7 @@ def main() -> int:
     checks.append(report("skill name is portable kebab-case", bool(re.fullmatch(r"[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?", name))))
     checks.append(report("description is under 1024 chars", 1 <= len(description) <= 1024, f"{len(description)} chars"))
 
-    for relative in ["scripts/validate-skill.py", "scripts/benchmark-prompts.py", "scripts/install-check.py"]:
+    for relative in ["scripts/validate-skill.py", "scripts/benchmark-prompts.py", "scripts/token-discipline-check.py", "scripts/install-check.py"]:
         path = ROOT / relative
         checks.append(report(f"script executable: {relative}", os.access(path, os.X_OK)))
 

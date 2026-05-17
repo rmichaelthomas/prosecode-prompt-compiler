@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1.0",
+  "provenance": "loom-mvp/server/rules.js runGrantFit() contradiction-detection pattern",
+  "rules": [
+    {
+      "name": "BREVITY_DEPTH_TENSION",
+      "description": "Request contains both brevity and comprehensiveness constraints.",
+      "markers_a": ["brief", "short", "concise", "quick", "summary"],
+      "markers_b": ["comprehensive", "thorough", "detailed", "exhaustive", "complete", "in-depth"],
+      "reason": "Brevity and comprehensiveness are in tension. The agent should note the tradeoff and choose the interpretation most consistent with the verb and audience."
+    },
+    {
+      "name": "TONE_TENSION",
+      "description": "Request asks for both casual and formal tone.",
+      "markers_a": ["casual", "relaxed", "conversational", "friendly", "informal", "laid back"],
+      "markers_b": ["formal", "professional", "official", "academic", "executive", "polished"],
+      "reason": "Casual and formal tones can conflict. The agent should blend carefully or ask which tone matters more when stakes are high."
+    },
+    {
+      "name": "AUDIENCE_TENSION",
+      "description": "Request names both beginner and advanced audiences.",
+      "markers_a": ["beginner", "like i'm five", "like i'm 5", "non-technical", "new to this", "novice"],
+      "markers_b": ["advanced", "expert", "technical audience", "specialist", "senior", "professional"],
+      "reason": "Beginner and advanced audiences need different assumptions. The agent should pick one primary audience or layer the response."
+    },
+    {
+      "name": "SIMPLICITY_DEPTH_TENSION",
+      "description": "Request asks for simple treatment and detailed depth.",
+      "markers_a": ["simple", "simplify", "plain", "easy", "basic", "minimal"],
+      "markers_b": ["detailed", "deep", "in depth", "full explanation", "comprehensive", "nuanced"],
+      "reason": "Simplicity and depth pull in different directions. The agent should use simple language while limiting or staging depth."
+    },
+    {
+      "name": "EFFORT_TENSION",
+      "description": "Request asks for fast turnaround and thorough effort.",
+      "markers_a": ["fast", "quick", "asap", "rapid", "right now", "rough"],
+      "markers_b": ["thorough", "careful", "rigorous", "deeply", "exhaustive", "fully researched"],
+      "reason": "Fast and thorough imply a tradeoff. The agent should be clear whether it is giving a quick pass or a deeper treatment."
+    },
+    {
+      "name": "STYLE_TENSION",
+      "description": "Request asks for creative style and factual restraint.",
+      "markers_a": ["creative", "imaginative", "inventive", "story-like", "dramatic", "evocative"],
+      "markers_b": ["factual", "accurate", "strictly true", "evidence-based", "literal", "no embellishment"],
+      "reason": "Creative expression can conflict with factual precision. The agent should preserve facts and confine creativity to framing or wording."
+    },
+    {
+      "name": "SCOPE_TENSION",
+      "description": "Request asks for both general overview and specific detail.",
+      "markers_a": ["general", "overview", "broad", "big picture", "high level", "overall"],
+      "markers_b": ["specific", "exact", "particular", "step by step", "line by line", "detailed example"],
+      "reason": "General and specific scopes imply different output shapes. The agent should choose a primary scope and optionally include a focused example."
+    },
+    {
+      "name": "LANGUAGE_TENSION",
+      "description": "Request asks for both technical language and accessible language.",
+      "markers_a": ["technical", "precise terminology", "jargon", "for developers", "engineering detail", "formal terms"],
+      "markers_b": ["accessible", "plain language", "simple words", "non-technical", "layperson", "easy to read"],
+      "reason": "Technical precision and accessibility can conflict. The agent should use plain explanations with technical terms introduced only when useful."
+    }
+  ]
+}

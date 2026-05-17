@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1.0",
+  "explain": {
+    "target": ["about", "what is", "how does", "tell me about", "explain", "describe", "what are", "how do", "what does", "why does"],
+    "depth": ["in detail", "briefly", "at a high level", "in depth", "quick overview", "thorough", "short", "deep dive", "surface level", "exhaustive"],
+    "audience": ["for a beginner", "like i'm five", "like i'm 5", "for an expert", "for someone who", "for a child", "for developers", "for non-technical", "for my boss", "simply"],
+    "context": ["because i need to", "for a presentation", "i'm trying to understand", "for work", "for a project", "for school", "for an interview", "to teach someone", "so i can", "before i"]
+  },
+  "create": {
+    "artifact": ["write", "draft", "create", "make", "generate", "build", "compose", "produce", "give me", "design"],
+    "topic": ["about", "on", "regarding", "for", "covering", "focused on", "topic is", "subject is", "around", "related to"],
+    "constraints": ["must", "should include", "without", "using", "make sure", "keep it", "limit to", "no more than", "at least", "requirements"],
+    "audience": ["for my team", "for my boss", "for executives", "for customers", "for students", "for beginners", "for developers", "for stakeholders", "for kids", "for readers"],
+    "style": ["formal", "casual", "friendly", "professional", "persuasive", "playful", "technical", "plain language", "concise", "creative"]
+  },
+  "transform": {
+    "source": ["this text", "the following", "below", "attached", "my notes", "this draft", "the document", "the code", "paste", "source"],
+    "target-form": ["into", "as a", "convert to", "turn into", "rewrite as", "format as", "summarize as", "make it a", "translate into", "structure as"],
+    "constraints": ["preserve", "keep", "don't change", "maintain", "without losing", "same meaning", "same tone", "shorten", "expand", "do not add"]
+  },
+  "analyze": {
+    "target": ["analyze", "review", "evaluate", "assess", "look at", "inspect", "examine", "audit", "compare", "diagnose"],
+    "criteria": ["for", "based on", "against", "criteria", "with respect to", "focus on", "looking for", "check whether", "measure", "judge by"],
+    "format": ["as bullets", "as a table", "score", "rank", "summary", "report", "findings", "pros and cons", "list", "brief"]
+  },
+  "decide": {
+    "options": ["should i", "which", "choose between", "pick", "better", "option", "or", "versus", "vs", "decide between"],
+    "criteria": ["based on", "priority is", "i care about", "optimize for", "most important", "criteria", "tradeoff", "budget", "time", "risk"],
+    "context": ["i'm trying to", "my situation", "for me", "given that", "because", "currently", "i need", "i have", "context", "use case"]
+  },
+  "plan": {
+    "goal": ["plan", "roadmap", "strategy", "how do i", "how can i", "steps to", "help me", "approach", "workflow", "schedule"],
+    "constraints": ["by", "within", "budget", "limited to", "only", "deadline", "constraints", "without", "using", "available"],
+    "context": ["currently", "right now", "i have", "starting from", "my situation", "we are", "background", "context", "already", "resources"]
+  },
+  "fix": {
+    "target": ["fix", "debug", "repair", "correct", "what's wrong with", "why is", "broken", "issue", "error", "bug"],
+    "symptoms": ["fails", "doesn't work", "error", "crashes", "hangs", "slow", "wrong output", "exception", "not loading", "unexpected"],
+    "context": ["in python", "in javascript", "in react", "on mac", "on windows", "environment", "version", "after", "when i", "using"]
+  }
+}

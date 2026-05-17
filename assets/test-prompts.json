@@ -1,0 +1,197 @@
+{
+  "schema_version": "0.1.0",
+  "tests": [
+    {
+      "prompt": "What is quantum computing?",
+      "expected_verb": "explain",
+      "expected_slots": {"target": "quantum computing"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Canonical explain - question-form reorderer rule 3"
+    },
+    {
+      "prompt": "Explain Kubernetes simply for a non-technical manager.",
+      "expected_verb": "explain",
+      "expected_slots": {"target": "Kubernetes", "depth": "simply", "audience": "non-technical manager"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Verb-first explain with audience and depth"
+    },
+    {
+      "prompt": "Write me a welcome email for new customers in a friendly tone.",
+      "expected_verb": "create",
+      "expected_slots": {"artifact": "welcome email", "audience": "new customers", "style": "friendly"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Create artifact with audience and style"
+    },
+    {
+      "prompt": "Build a checklist for launching a small podcast.",
+      "expected_verb": "create",
+      "expected_slots": {"artifact": "checklist", "topic": "launching a small podcast"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Create artifact with topic"
+    },
+    {
+      "prompt": "Turn the following notes into a concise project brief.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "following notes", "target-form": "project brief", "constraints": "concise"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Transform with explicit target form"
+    },
+    {
+      "prompt": "Rewrite this draft as a formal executive summary without changing the meaning.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "this draft", "target-form": "executive summary", "constraints": "without changing the meaning"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Transform with preservation constraint"
+    },
+    {
+      "prompt": "Analyze this landing page for clarity and conversion.",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "this landing page", "criteria": "clarity and conversion"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Analyze target against criteria"
+    },
+    {
+      "prompt": "Review my proposal and give findings as bullets.",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "my proposal", "format": "bullets"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Analyze with requested output format"
+    },
+    {
+      "prompt": "Should I use SQLite or Postgres for a small internal tool?",
+      "expected_verb": "decide",
+      "expected_slots": {"options": ["SQLite", "Postgres"], "context": "small internal tool"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Question-form decide"
+    },
+    {
+      "prompt": "Choose between hiring a contractor and waiting for a full-time engineer, optimizing for speed and risk.",
+      "expected_verb": "decide",
+      "expected_slots": {"options": ["hiring a contractor", "waiting for a full-time engineer"], "criteria": "speed and risk"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Decide with explicit criteria"
+    },
+    {
+      "prompt": "Plan a three-month rollout for a new onboarding program.",
+      "expected_verb": "plan",
+      "expected_slots": {"goal": "three-month rollout for a new onboarding program"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Plan with direct goal"
+    },
+    {
+      "prompt": "How do I migrate our docs to a new CMS by September with only two editors?",
+      "expected_verb": "plan",
+      "expected_slots": {"goal": "migrate our docs to a new CMS", "constraints": "by September with only two editors"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "How-do-I maps to plan when no broken target is present"
+    },
+    {
+      "prompt": "Fix this Python script; it crashes after reading the CSV.",
+      "expected_verb": "fix",
+      "expected_slots": {"target": "Python script", "symptoms": "crashes after reading the CSV", "context": "Python"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Fix with target, symptoms, and environment"
+    },
+    {
+      "prompt": "Why is my React component not loading when I pass empty data?",
+      "expected_verb": "fix",
+      "expected_slots": {"target": "React component", "symptoms": "not loading when I pass empty data", "context": "React"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Question form reclassified to fix"
+    },
+    {
+      "prompt": "Explain React hooks and write me an example component.",
+      "expected_verb": "explain",
+      "expected_slots": {"target": "React hooks"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Compound intent - primary explain, secondary create"
+    },
+    {
+      "prompt": "Analyze this budget and create a one-page summary for the board.",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "this budget", "format": "one-page summary"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Compound intent - primary analyze, secondary create"
+    },
+    {
+      "prompt": "Fix the bug and then plan how to prevent it from recurring.",
+      "expected_verb": "fix",
+      "expected_slots": {"target": "the bug"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Compound intent - primary fix, secondary plan"
+    },
+    {
+      "prompt": "Decide which CRM we should buy and draft the announcement.",
+      "expected_verb": "decide",
+      "expected_slots": {"options": "CRM options"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Compound intent - primary decide, secondary create"
+    },
+    {
+      "prompt": "Write me a brief but comprehensive report on market trends for my CEO.",
+      "expected_verb": "create",
+      "expected_slots": {"artifact": "report", "topic": "market trends", "audience": "CEO"},
+      "expected_gaps": [],
+      "expected_flags": ["BREVITY_DEPTH_TENSION"],
+      "notes": "Contradiction example - brief + comprehensive triggers amber"
+    },
+    {
+      "prompt": "Make the email casual but formal enough for legal review.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "the email", "target-form": "email", "constraints": "casual but formal enough for legal review"},
+      "expected_gaps": [],
+      "expected_flags": ["TONE_TENSION"],
+      "notes": "Contradiction example - casual + formal"
+    },
+    {
+      "prompt": "Explain OAuth for beginners and advanced backend engineers.",
+      "expected_verb": "explain",
+      "expected_slots": {"target": "OAuth", "audience": "beginners and advanced backend engineers"},
+      "expected_gaps": [],
+      "expected_flags": ["AUDIENCE_TENSION"],
+      "notes": "Contradiction example - beginner + advanced"
+    },
+    {
+      "prompt": "Give a fast but thorough analysis of this incident report.",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "this incident report", "criteria": "fast but thorough"},
+      "expected_gaps": [],
+      "expected_flags": ["EFFORT_TENSION"],
+      "notes": "Contradiction example - fast + thorough"
+    },
+    {
+      "prompt": "Hey, how's it going?",
+      "expected_verb": null,
+      "expected_slots": {},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Edge case - greeting, skill should not activate"
+    },
+    {
+      "prompt": "Keep going.",
+      "expected_verb": null,
+      "expected_slots": {},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Edge case - continuation prompt, skill should not activate"
+    }
+  ]
+}

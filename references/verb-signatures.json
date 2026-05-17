@@ -1,0 +1,196 @@
+{
+  "schema_version": "0.1.0",
+  "provenance": {
+    "slot_pattern": "liminate/vocabulary.py PackVerbSlot",
+    "phrase_matching": "loom-mvp/server/rules.js hasAny()",
+    "fallback_scaffold": "narratia-mvp/utils.py naive_outline()"
+  },
+  "verbs": [
+    {
+      "word": "explain",
+      "definition": "User wants to understand something. Output serves comprehension.",
+      "slots": [
+        {
+          "name": "target",
+          "required": true,
+          "type_constraint": "topic",
+          "phrase_markers_ref": "phrase-markers.json#explain.target"
+        },
+        {
+          "name": "depth",
+          "required": false,
+          "type_constraint": "depth-level",
+          "phrase_markers_ref": "phrase-markers.json#explain.depth"
+        },
+        {
+          "name": "audience",
+          "required": false,
+          "type_constraint": "audience-descriptor",
+          "phrase_markers_ref": "phrase-markers.json#explain.audience"
+        },
+        {
+          "name": "context",
+          "required": false,
+          "type_constraint": "purpose",
+          "phrase_markers_ref": "phrase-markers.json#explain.context"
+        }
+      ]
+    },
+    {
+      "word": "create",
+      "definition": "User wants an artifact produced. Output serves an external purpose.",
+      "slots": [
+        {
+          "name": "artifact",
+          "required": true,
+          "type_constraint": "artifact-type",
+          "phrase_markers_ref": "phrase-markers.json#create.artifact"
+        },
+        {
+          "name": "topic",
+          "required": false,
+          "type_constraint": "topic",
+          "phrase_markers_ref": "phrase-markers.json#create.topic"
+        },
+        {
+          "name": "constraints",
+          "required": false,
+          "type_constraint": "requirement",
+          "phrase_markers_ref": "phrase-markers.json#create.constraints"
+        },
+        {
+          "name": "audience",
+          "required": false,
+          "type_constraint": "audience-descriptor",
+          "phrase_markers_ref": "phrase-markers.json#create.audience"
+        },
+        {
+          "name": "style",
+          "required": false,
+          "type_constraint": "style-descriptor",
+          "phrase_markers_ref": "phrase-markers.json#create.style"
+        }
+      ]
+    },
+    {
+      "word": "transform",
+      "definition": "User wants existing material changed into a different form.",
+      "slots": [
+        {
+          "name": "source",
+          "required": true,
+          "type_constraint": "material",
+          "phrase_markers_ref": "phrase-markers.json#transform.source"
+        },
+        {
+          "name": "target-form",
+          "required": true,
+          "type_constraint": "format-descriptor",
+          "phrase_markers_ref": "phrase-markers.json#transform.target-form"
+        },
+        {
+          "name": "constraints",
+          "required": false,
+          "type_constraint": "preservation-rule",
+          "phrase_markers_ref": "phrase-markers.json#transform.constraints"
+        }
+      ]
+    },
+    {
+      "word": "analyze",
+      "definition": "User wants something examined and findings reported.",
+      "slots": [
+        {
+          "name": "target",
+          "required": true,
+          "type_constraint": "material",
+          "phrase_markers_ref": "phrase-markers.json#analyze.target"
+        },
+        {
+          "name": "criteria",
+          "required": false,
+          "type_constraint": "criteria-set",
+          "phrase_markers_ref": "phrase-markers.json#analyze.criteria"
+        },
+        {
+          "name": "format",
+          "required": false,
+          "type_constraint": "output-format",
+          "phrase_markers_ref": "phrase-markers.json#analyze.format"
+        }
+      ]
+    },
+    {
+      "word": "decide",
+      "definition": "User wants help choosing between options.",
+      "slots": [
+        {
+          "name": "options",
+          "required": true,
+          "type_constraint": "option-set",
+          "phrase_markers_ref": "phrase-markers.json#decide.options"
+        },
+        {
+          "name": "criteria",
+          "required": false,
+          "type_constraint": "criteria-set",
+          "phrase_markers_ref": "phrase-markers.json#decide.criteria"
+        },
+        {
+          "name": "context",
+          "required": false,
+          "type_constraint": "situation",
+          "phrase_markers_ref": "phrase-markers.json#decide.context"
+        }
+      ]
+    },
+    {
+      "word": "plan",
+      "definition": "User wants a strategy or approach designed.",
+      "slots": [
+        {
+          "name": "goal",
+          "required": true,
+          "type_constraint": "goal-descriptor",
+          "phrase_markers_ref": "phrase-markers.json#plan.goal"
+        },
+        {
+          "name": "constraints",
+          "required": false,
+          "type_constraint": "constraint-set",
+          "phrase_markers_ref": "phrase-markers.json#plan.constraints"
+        },
+        {
+          "name": "context",
+          "required": false,
+          "type_constraint": "current-state",
+          "phrase_markers_ref": "phrase-markers.json#plan.context"
+        }
+      ]
+    },
+    {
+      "word": "fix",
+      "definition": "User wants something corrected or debugged.",
+      "slots": [
+        {
+          "name": "target",
+          "required": true,
+          "type_constraint": "broken-thing",
+          "phrase_markers_ref": "phrase-markers.json#fix.target"
+        },
+        {
+          "name": "symptoms",
+          "required": false,
+          "type_constraint": "symptom-descriptor",
+          "phrase_markers_ref": "phrase-markers.json#fix.symptoms"
+        },
+        {
+          "name": "context",
+          "required": false,
+          "type_constraint": "environment",
+          "phrase_markers_ref": "phrase-markers.json#fix.context"
+        }
+      ]
+    }
+  ]
+}

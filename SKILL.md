@@ -1,14 +1,14 @@
 ---
-name: prompt-reformatter
+name: prosecode-intent-compiler
 description: >
-  Classify and restructure user prompts using a bounded verb-and-slot
-  vocabulary before generating a response. Activates on every user prompt
-  invisibly. The agent decomposes natural language into one of seven intent
-  verbs (explain, create, transform, analyze, decide, plan, fix), fills
-  named slots from the prompt content, flags missing required information
-  and contradictory constraints, then generates from the structured scaffold
-  instead of the raw input. Use on all conversational prompts. Do not use
-  on system messages, tool outputs, or automated pipeline inputs.
+  Compile user prompts into compact Intent IR using a Liminate-derived
+  bounded verb-and-slot vocabulary before generating a response. Activates
+  invisibly on conversational prompts. The agent classifies one of seven
+  intent verbs (explain, create, transform, analyze, decide, plan, fix),
+  fills named slots, flags missing required information and contradictory
+  constraints, calibrates response posture, then generates from the Intent IR
+  instead of raw input alone. Do not use on system messages, tool outputs, or
+  automated pipeline inputs.
 license: MIT
 metadata:
   author: rmichaelthomas
@@ -16,11 +16,11 @@ metadata:
   provenance: "Liminate bounded-vocabulary architecture + Narratia meaning-ordering + Loom contradiction-detection"
 ---
 
-# Prompt Reformatter
+# Prosecode Intent Compiler
 
 ## How This Skill Works
 
-This skill operates invisibly before the agent responds. On every eligible user prompt, the agent classifies intent against the verb table, fills slots from the prompt content, checks for missing required slots, checks for contradictions between slot values, produces an internal scaffold, and generates from that scaffold rather than from the raw prompt alone. The user sees only the final response, not the reformatting.
+This skill operates invisibly before the agent responds. On every eligible user prompt, the agent classifies intent against the verb table, fills slots from the prompt content, checks for missing required slots, checks for contradictions between slot values, produces compact Intent IR, and generates from that IR rather than from the raw prompt alone. The user sees only the final response, not the compilation step.
 
 ## Intent Verbs
 
@@ -52,9 +52,11 @@ Each slot has phrase markers: natural-language patterns that signal the slot is 
 
 ## Scaffold Output
 
-The internal scaffold contains the identified verb, filled slots with extracted values, empty optional slots with defaults or omissions, gap flags for missing required slots, amber flags for contradictions, and assumptions for inferred slot values with reasoning. The scaffold is never shown to the user.
+The internal scaffold is Intent IR. It contains the identified verb, filled slots with extracted values, empty optional slots with defaults or omissions, gap flags for missing required slots, amber flags for contradictions, human-context signals, secondary intents, confidence, and assumptions for inferred slot values with reasoning. The scaffold is never shown to the user.
 
 When input is too vague to decompose, use the fallback scaffold pattern: choose the nearest eligible verb, preserve the user's original phrasing as the broad target or goal, apply minimal defaults, and proceed only if doing so is more helpful than asking a clarifying question.
+
+For the optional protocol-shaped references, see [intent-ir.md](references/intent-ir.md), [compiler-passes.md](references/compiler-passes.md), [response-validation.md](references/response-validation.md), [prompt-diffing.md](references/prompt-diffing.md), [skill-routing.md](references/skill-routing.md), and [handoff-packets.md](references/handoff-packets.md).
 
 ## Human Prompt Calibration
 

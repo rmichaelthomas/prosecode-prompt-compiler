@@ -1,6 +1,6 @@
-# prompt-reformatter
+# prosecode-intent-compiler
 
-`prompt-reformatter` is a portable Agent Skill that helps an agent invisibly classify and restructure user prompts before answering. It maps natural language requests into a bounded verb-and-slot scaffold, checks for missing required information and contradictory constraints, then lets the agent generate from the scaffold rather than the raw prompt alone.
+`prosecode-intent-compiler` is a portable Agent Skill that helps an agent invisibly compile user prompts into compact Intent IR before answering. It maps natural language requests into a Liminate-derived bounded verb-and-slot scaffold, checks for missing required information and contradictory constraints, calibrates response posture, then lets the agent generate from the IR rather than the raw prompt alone.
 
 The user never sees the scaffold. They just get a clearer, better-targeted response.
 
@@ -23,9 +23,18 @@ The skill uses seven intent verbs:
 ## Structure
 
 ```text
-prompt-reformatter/
+prosecode-intent-compiler/
 ├── SKILL.md
+├── README.md
+├── checkpoints/
+│   └── prosecode_checkpoint_v1_intent_ir_and_agent_protocol.md
 ├── references/
+│   ├── intent-ir.md
+│   ├── compiler-passes.md
+│   ├── response-validation.md
+│   ├── prompt-diffing.md
+│   ├── skill-routing.md
+│   ├── handoff-packets.md
 │   ├── verb-signatures.json
 │   ├── phrase-markers.json
 │   ├── contradiction-rules.json
@@ -38,6 +47,7 @@ prompt-reformatter/
 └── scripts/
     ├── validate-skill.py
     ├── benchmark-prompts.py
+    ├── token-discipline-check.py
     └── install-check.py
 ```
 
@@ -50,6 +60,8 @@ This skill adapts patterns from three existing codebases:
 - Narratia MVP: fallback scaffolding for vague input
 
 See [references/DESIGN_PROVENANCE.md](references/DESIGN_PROVENANCE.md) for the full source map.
+
+The repo began as `prompt-reformatter`; the Prosecode checkpoint in [checkpoints/prosecode_checkpoint_v1_intent_ir_and_agent_protocol.md](checkpoints/prosecode_checkpoint_v1_intent_ir_and_agent_protocol.md) records why it was renamed.
 
 ## Validation
 
@@ -91,12 +103,12 @@ Before installing, run:
 python3 scripts/install-check.py
 ```
 
-Copy the `prompt-reformatter` folder into a skills directory supported by your agent environment.
+Copy the `prosecode-intent-compiler` folder into a skills directory supported by your agent environment.
 
 For Codex, that is commonly:
 
 ```text
-~/.codex/skills/prompt-reformatter
+~/.codex/skills/prosecode-intent-compiler
 ```
 
 For other tools, use the skill installation path documented by that tool. The skill intentionally uses only portable Agent Skills frontmatter fields: `name`, `description`, `license`, and `metadata`.

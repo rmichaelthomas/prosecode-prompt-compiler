@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pre-install sanity checks for the prompt-reformatter skill."""
+"""Pre-install sanity checks for the prosecode-intent-compiler skill."""
 
 from __future__ import annotations
 
@@ -14,6 +14,13 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = [
     "SKILL.md",
     "README.md",
+    "checkpoints/prosecode_checkpoint_v1_intent_ir_and_agent_protocol.md",
+    "references/intent-ir.md",
+    "references/compiler-passes.md",
+    "references/response-validation.md",
+    "references/prompt-diffing.md",
+    "references/skill-routing.md",
+    "references/handoff-packets.md",
     "references/verb-signatures.json",
     "references/phrase-markers.json",
     "references/contradiction-rules.json",
@@ -78,7 +85,7 @@ def main() -> int:
     args = parser.parse_args()
 
     checks: list[bool] = []
-    checks.append(report("running from prompt-reformatter folder", ROOT.name == "prompt-reformatter", str(ROOT)))
+    checks.append(report("running from prosecode-intent-compiler folder", ROOT.name == "prosecode-intent-compiler", str(ROOT)))
 
     for relative in REQUIRED_FILES:
         checks.append(report(f"required file exists: {relative}", (ROOT / relative).is_file()))

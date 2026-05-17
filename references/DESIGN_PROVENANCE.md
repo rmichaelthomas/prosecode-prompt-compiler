@@ -26,4 +26,4 @@ Loom also contributes the contradiction detector. The skill uses named amber fla
 
 Narratia contributes fallback scaffolding. When the input is too vague to decompose cleanly, the skill still creates a minimal scaffold from the user's own wording, unless a required slot is too important to infer.
 
-The final package is instruction-only. `SKILL.md` describes the operational method, `references/` stores the bounded tables, `assets/test-prompts.json` provides pressure cases, and `scripts/validate-skill.py` validates the package during development.
+The final package is instruction-only. `SKILL.md` describes the operational method, `references/` stores the bounded tables and protocol-shaped notes, `assets/test-prompts.json` provides pressure cases, and `scripts/validate-skill.py` validates the package during development.

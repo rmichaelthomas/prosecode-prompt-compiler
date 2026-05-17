@@ -290,7 +290,7 @@ def run_benchmark(verbose: bool = False) -> int:
     gap_recall = 1.0 if gap_total == 0 else gap_hits / gap_total
     combined = (verb_accuracy + flag_recall + slot_recall + gap_recall) / 4
 
-    print("prompt-reformatter benchmark")
+    print("prosecode-intent-compiler benchmark")
     print(f"suites: {len(suites)}")
     print(f"cases: {total_cases}")
     print(f"verb_accuracy: {verb_hits}/{total_cases} = {verb_accuracy:.1%}")

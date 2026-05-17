@@ -14,7 +14,6 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = [
     "SKILL.md",
     "README.md",
-    "checkpoints/prosecode_checkpoint_v1_intent_ir_and_agent_protocol.md",
     "references/intent-ir.md",
     "references/compiler-passes.md",
     "references/response-validation.md",

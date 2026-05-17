@@ -60,6 +60,16 @@ The validator checks:
 - test prompt coverage
 - expected counts for verbs, slots, test cases, and contradiction rules
 
+## Benchmarking
+
+Run the deterministic prompt benchmark:
+
+```bash
+python3 scripts/benchmark-prompts.py --verbose
+```
+
+This benchmark checks the bundled prompt cases against the bounded marker vocabulary and contradiction rules. It reports verb classification accuracy, contradiction flag recall, and expected slot-key recall. It is a reference-table smoke test, not a live model evaluation.
+
 ## Installation
 
 Copy the `prompt-reformatter` folder into a skills directory supported by your agent environment.

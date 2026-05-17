@@ -54,7 +54,7 @@
     {
       "name": "LANGUAGE_TENSION",
       "description": "Request asks for both technical language and accessible language.",
-      "markers_a": ["technical", "precise terminology", "jargon", "for developers", "engineering detail", "formal terms"],
+      "markers_a": ["technical language", "technical detail", "precise terminology", "jargon", "for developers", "engineering detail", "formal terms"],
       "markers_b": ["accessible", "plain language", "simple words", "non-technical", "layperson", "easy to read"],
       "reason": "Technical precision and accessibility can conflict. The agent should use plain explanations with technical terms introduced only when useful."
     }

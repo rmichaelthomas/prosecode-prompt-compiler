@@ -2,8 +2,8 @@
   "schema_version": "0.1.0",
   "explain": {
     "target": ["about", "what is", "how does", "tell me about", "explain", "describe", "what are", "how do", "what does", "why does"],
-    "depth": ["in detail", "briefly", "at a high level", "in depth", "quick overview", "thorough", "short", "deep dive", "surface level", "exhaustive"],
-    "audience": ["for a beginner", "like i'm five", "like i'm 5", "for an expert", "for someone who", "for a child", "for developers", "for non-technical", "for my boss", "simply"],
+    "depth": ["in detail", "briefly", "at a high level", "in depth", "quick overview", "thorough", "short", "deep dive", "surface level", "exhaustive", "simply"],
+    "audience": ["for a beginner", "for beginners", "like i'm five", "like i'm 5", "for an expert", "for someone who", "for a child", "for developers", "for non-technical", "for my boss", "simply"],
     "context": ["because i need to", "for a presentation", "i'm trying to understand", "for work", "for a project", "for school", "for an interview", "to teach someone", "so i can", "before i"]
   },
   "create": {
@@ -16,10 +16,10 @@
   "transform": {
     "source": ["this text", "the following", "below", "attached", "my notes", "this draft", "the document", "the code", "paste", "source"],
     "target-form": ["into", "as a", "convert to", "turn into", "rewrite as", "format as", "summarize as", "make it a", "translate into", "structure as"],
-    "constraints": ["preserve", "keep", "don't change", "maintain", "without losing", "same meaning", "same tone", "shorten", "expand", "do not add"]
+    "constraints": ["preserve", "keep", "don't change", "without changing", "maintain", "without losing", "same meaning", "same tone", "shorten", "expand", "do not add", "concise"]
   },
   "analyze": {
-    "target": ["analyze", "review", "evaluate", "assess", "look at", "inspect", "examine", "audit", "compare", "diagnose"],
+    "target": ["analyze", "analysis", "review", "evaluate", "assess", "look at", "inspect", "examine", "audit", "compare", "diagnose"],
     "criteria": ["for", "based on", "against", "criteria", "with respect to", "focus on", "looking for", "check whether", "measure", "judge by"],
     "format": ["as bullets", "as a table", "score", "rank", "summary", "report", "findings", "pros and cons", "list", "brief"]
   },

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Internal token-discipline check for prosecode-intent-compiler.
+"""Internal token-discipline check for prosecode-prompt-compiler.
 
 This is intentionally quiet: it is not a public performance benchmark. It
 keeps the skill honest about progressive disclosure and compact scaffolding.

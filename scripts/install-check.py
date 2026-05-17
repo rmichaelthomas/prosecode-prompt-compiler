@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pre-install sanity checks for the prosecode-intent-compiler skill."""
+"""Pre-install sanity checks for the prosecode-prompt-compiler skill."""
 
 from __future__ import annotations
 
@@ -85,7 +85,7 @@ def main() -> int:
     args = parser.parse_args()
 
     checks: list[bool] = []
-    checks.append(report("running from prosecode-intent-compiler folder", ROOT.name == "prosecode-intent-compiler", str(ROOT)))
+    checks.append(report("running from prosecode-prompt-compiler folder", ROOT.name == "prosecode-prompt-compiler", str(ROOT)))
 
     for relative in REQUIRED_FILES:
         checks.append(report(f"required file exists: {relative}", (ROOT / relative).is_file()))

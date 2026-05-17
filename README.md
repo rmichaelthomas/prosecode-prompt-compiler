@@ -1,12 +1,82 @@
-# prosecode-intent-compiler
+# prosecode-prompt-compiler
 
-`prosecode-intent-compiler` is a portable Agent Skill that helps an agent invisibly compile user prompts into compact Intent IR before answering. It maps natural language requests into a Liminate-derived bounded verb-and-slot scaffold, checks for missing required information and contradictory constraints, calibrates response posture, then lets the agent generate from the IR rather than the raw prompt alone.
+Turns a messy prompt into a clean instruction before the agent answers.
 
-The user never sees the scaffold. They just get a clearer, better-targeted response.
+It maps natural-language requests into a small verb-and-slot scaffold, flags missing information and contradictions, and lets the agent generate from the structured form rather than the raw words. The user never sees the scaffold. They just get a better-targeted response.
 
-The skill is intentionally token-conscious: `SKILL.md` stays compact, detailed tables live in references, and the internal scaffold is meant to be small enough to reduce wasted output rather than add overhead.
+## What it does
 
-## Intent Verbs
+Most prompts are a mix of intent, context, constraints, and noise. The compiler reads the prompt once and produces a compact intent record: which of seven verbs the user is asking for, which slots are filled, which are missing, and whether the constraints conflict.
+
+The agent then has two things instead of one — the original prompt, and a clear statement of what was actually being asked. It can ask one targeted clarifying question instead of guessing, or proceed with the right posture if the intent is already clear.
+
+## Example
+
+**Raw prompt:**
+
+> "can you help me figure out why the checkout is breaking? users say orders go through but never appear in the admin panel. also if you could rewrite the error message that would be great"
+
+**Compiled intent:**
+
+```
+verb: analyze
+target: checkout flow — order submission to admin panel propagation
+symptoms: orders submit successfully, do not appear in admin
+secondary-verb: transform
+secondary-target: error message
+contradiction: none
+missing: none
+posture: investigative; user has not yet shared logs or code
+```
+
+The agent now knows it has two requests (analyze, then rewrite), what the symptom signature is, and that it should ask for logs before guessing.
+
+## Part of the Liminate family
+
+Liminate is a prose-as-syntax programming language where plain English sentences execute directly. These five repos form a system for writing, verifying, and transferring structured reasoning.
+
+| | Repo | What it does |
+|---|---|---|
+| | [liminate](https://github.com/rmichaelthomas/liminate) | The language and interpreter. Bounded vocabulary, deterministic execution, domain packs. |
+| | [liminate-session-contracts](https://github.com/rmichaelthomas/liminate-session-contracts) | Tracks verified sources, inferred claims, locked decisions, and user corrections as executable `.limn` contracts. |
+| **← this repo** | [**prosecode-prompt-compiler**](https://github.com/rmichaelthomas/prosecode-prompt-compiler) | **Compiles user prompts into structured intent before the agent responds. Seven verbs, twenty-four slots.** |
+| | [prosecode-context-pager](https://github.com/rmichaelthomas/prosecode-context-pager) | Scores conversation history against current intent. Decides what to keep, summarize, or drop. |
+| | [prosecode-handoff-packet](https://github.com/rmichaelthomas/prosecode-handoff-packet) | Packages a working session for another agent to continue — preserving what was verified and what wasn't. |
+
+→ [onesurface.org/liminate](https://onesurface.org/liminate)
+
+## Install
+
+This skill follows the [agentskills.io](https://agentskills.io) SKILL.md standard. Any compliant agent can load it.
+
+```bash
+# Claude Code — all projects
+git clone https://github.com/rmichaelthomas/prosecode-prompt-compiler.git ~/.claude/skills/prosecode-prompt-compiler
+
+# Claude Code — one project
+git clone https://github.com/rmichaelthomas/prosecode-prompt-compiler.git .claude/skills/prosecode-prompt-compiler
+
+# Codex CLI
+git clone https://github.com/rmichaelthomas/prosecode-prompt-compiler.git ~/.codex/skills/prosecode-prompt-compiler
+
+# Gemini CLI
+git clone https://github.com/rmichaelthomas/prosecode-prompt-compiler.git ~/.gemini/skills/prosecode-prompt-compiler
+
+# Any SKILL.md-compatible agent
+git clone https://github.com/rmichaelthomas/prosecode-prompt-compiler.git .agents/skills/prosecode-prompt-compiler
+```
+
+Before installing, run:
+
+```bash
+python3 scripts/install-check.py
+```
+
+The skill uses only portable Agent Skills frontmatter fields: `name`, `description`, `license`, and `metadata`.
+
+## How it works
+
+### Intent verbs
 
 The skill uses seven intent verbs:
 
@@ -20,98 +90,41 @@ The skill uses seven intent verbs:
 | `plan` | Design a strategy or approach | `goal` |
 | `fix` | Correct or debug something | `target` |
 
-## Structure
+Compounds (`analyze` + `transform` in the example above) are first-class — the IR carries a `secondary-verb` alongside the primary one when both are clearly present.
 
-```text
-prosecode-intent-compiler/
-├── SKILL.md
-├── README.md
-├── checkpoints/
-│   └── prosecode_checkpoint_v1_intent_ir_and_agent_protocol.md
-├── references/
-│   ├── intent-ir.md
-│   ├── compiler-passes.md
-│   ├── response-validation.md
-│   ├── prompt-diffing.md
-│   ├── skill-routing.md
-│   ├── handoff-packets.md
-│   ├── verb-signatures.json
-│   ├── phrase-markers.json
-│   ├── contradiction-rules.json
-│   ├── human-prompt-patterns.json
-│   └── DESIGN_PROVENANCE.md
-├── assets/
-│   ├── test-prompts.json
-│   ├── adversarial-test-prompts.json
-│   └── live-eval-results.json
-└── scripts/
-    ├── validate-skill.py
-    ├── benchmark-prompts.py
-    ├── token-discipline-check.py
-    └── install-check.py
-```
+### Compiler passes
 
-## Provenance
+A prompt flows through a small sequence of passes:
 
-This skill adapts patterns from three existing codebases:
+1. **Phrase markers** — bounded lowercase token matching against `references/phrase-markers.json` to detect verb cues, slot fillers, and posture signals.
+2. **Slot filling** — populate the verb's required and optional slots from matched phrases.
+3. **Contradiction detection** — check `references/contradiction-rules.json` for incompatible constraint pairs.
+4. **Gap detection** — flag required slots that no phrase filled.
+5. **Posture calibration** — set the response posture (investigative, directive, collaborative) from contextual cues.
 
-- Liminate: bounded verb-slot vocabulary and narrow reorderer acceptance rules
-- Loom MVP: lowercase bounded phrase matching and contradiction detection
-- Narratia MVP: fallback scaffolding for vague input
-
-See [references/DESIGN_PROVENANCE.md](references/DESIGN_PROVENANCE.md) for the full source map.
-
-The repo began as `prompt-reformatter`; the Prosecode checkpoint in [checkpoints/prosecode_checkpoint_v1_intent_ir_and_agent_protocol.md](checkpoints/prosecode_checkpoint_v1_intent_ir_and_agent_protocol.md) records why it was renamed.
-
-## Validation
-
-Run the built-in validator:
+### Validate and benchmark
 
 ```bash
-python3 scripts/validate-skill.py
-```
-
-The validator checks:
-
-- `SKILL.md` frontmatter portability
-- JSON parseability
-- verb and slot table consistency
-- test prompt coverage
-- expected counts for verbs, slots, test cases, and contradiction rules
-
-## Benchmarking
-
-Run the deterministic prompt benchmark:
-
-```bash
+python3 scripts/validate-skill.py        # frontmatter + JSON + table consistency
 python3 scripts/benchmark-prompts.py --verbose
 ```
 
-This benchmark checks the bundled prompt cases against the bounded marker vocabulary, contradiction rules, gap detection, and human-context markers. It reports verb classification accuracy, contradiction and human flag recall, expected slot-key recall, and required-gap recall. It is a reference-table smoke test, not a live model evaluation.
+Two benchmark suites ship in `assets/`:
 
-Current suites:
+- `test-prompts.json` — canonical coverage for the seven verbs, compounds, contradictions, and pass-through prompts.
+- `adversarial-test-prompts.json` — messy human prompts with uncertainty, typos, vague asks, false-positive substring traps, high-stakes contexts, and reversed priorities.
 
-- `assets/test-prompts.json`: canonical coverage for the seven intent verbs, compounds, contradictions, and pass-through prompts.
-- `assets/adversarial-test-prompts.json`: messy human prompts with uncertainty, typos, vague asks, false-positive substring traps, high-stakes contexts, and reversed priorities.
-- `assets/live-eval-results.json`: pre-install response-behavior review for ten messy prompts.
+The benchmark is a reference-table smoke test, not a live model evaluation. It reports verb classification accuracy, contradiction and human-flag recall, expected slot-key recall, and required-gap recall.
 
-## Installation
+### Provenance
 
-Before installing, run:
+The compiler adapts patterns from three earlier codebases:
 
-```bash
-python3 scripts/install-check.py
-```
+- **Liminate** — bounded verb-slot vocabulary and narrow reorderer acceptance rules.
+- **Loom MVP** — lowercase bounded phrase matching and contradiction detection.
+- **Narratia MVP** — fallback scaffolding for vague input.
 
-Copy the `prosecode-intent-compiler` folder into a skills directory supported by your agent environment.
-
-For Codex, that is commonly:
-
-```text
-~/.codex/skills/prosecode-intent-compiler
-```
-
-For other tools, use the skill installation path documented by that tool. The skill intentionally uses only portable Agent Skills frontmatter fields: `name`, `description`, `license`, and `metadata`.
+See [`references/DESIGN_PROVENANCE.md`](references/DESIGN_PROVENANCE.md) for the full source map.
 
 ## License
 

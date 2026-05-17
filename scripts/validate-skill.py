@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the prosecode-intent-compiler skill package with standard library only."""
+"""Validate the prosecode-prompt-compiler skill package with standard library only."""
 
 from __future__ import annotations
 

@@ -1,5 +1,5 @@
 ---
-name: prosecode-intent-compiler
+name: prosecode-prompt-compiler
 description: >
   Compile user prompts into compact Intent IR using a Liminate-derived
   bounded verb-and-slot vocabulary before generating a response. Activates
@@ -16,7 +16,7 @@ metadata:
   provenance: "Liminate bounded-vocabulary architecture + Narratia meaning-ordering + Loom contradiction-detection"
 ---
 
-# Prosecode Intent Compiler
+# Prosecode Prompt Compiler
 
 ## How This Skill Works
 

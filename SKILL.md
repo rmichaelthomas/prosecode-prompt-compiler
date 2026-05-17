@@ -56,6 +56,10 @@ The internal scaffold contains the identified verb, filled slots with extracted 
 
 When input is too vague to decompose, use the fallback scaffold pattern: choose the nearest eligible verb, preserve the user's original phrasing as the broad target or goal, apply minimal defaults, and proceed only if doing so is more helpful than asking a clarifying question.
 
+## Human Prompt Calibration
+
+Treat imperfect prompts as ordinary human context, not as evidence of low ability. Hesitation, typos, self-deprecation, missing vocabulary, or emotional pressure are signals to lower interaction friction: infer carefully, use plain language by default, ask at most one focused question when a required slot is truly missing, and name assumptions gently. If the user sounds expert, preserve precision. If the user sounds uncertain or overwhelmed, scaffold the next step without exposing the scaffold.
+
 ## When NOT to Apply
 
 Do not apply this skill to greetings, meta-questions about the agent itself, continuation prompts such as "go on" or "keep going", tool-output processing, system-level instructions, or automated pipeline inputs. These pass through without reformatting.

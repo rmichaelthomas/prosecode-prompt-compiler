@@ -68,7 +68,12 @@ Run the deterministic prompt benchmark:
 python3 scripts/benchmark-prompts.py --verbose
 ```
 
-This benchmark checks the bundled prompt cases against the bounded marker vocabulary and contradiction rules. It reports verb classification accuracy, contradiction flag recall, and expected slot-key recall. It is a reference-table smoke test, not a live model evaluation.
+This benchmark checks the bundled prompt cases against the bounded marker vocabulary, contradiction rules, gap detection, and human-context markers. It reports verb classification accuracy, contradiction and human flag recall, expected slot-key recall, and required-gap recall. It is a reference-table smoke test, not a live model evaluation.
+
+Current suites:
+
+- `assets/test-prompts.json`: canonical coverage for the seven intent verbs, compounds, contradictions, and pass-through prompts.
+- `assets/adversarial-test-prompts.json`: messy human prompts with uncertainty, typos, vague asks, false-positive substring traps, high-stakes contexts, and reversed priorities.
 
 ## Installation
 

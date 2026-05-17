@@ -1,0 +1,262 @@
+{
+  "schema_version": "0.1.0",
+  "suite": "adversarial-human-prompts",
+  "tests": [
+    {
+      "prompt": "How do I stop this script from crashing?",
+      "expected_verb": "fix",
+      "expected_slots": {"target": "script", "symptoms": "crashing"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Ambiguous how-do-I should become fix when brokenness is present"
+    },
+    {
+      "prompt": "How do I launch a newsletter if I only have weekends?",
+      "expected_verb": "plan",
+      "expected_slots": {"goal": "launch a newsletter", "constraints": "only have weekends"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "How-do-I without brokenness should remain plan"
+    },
+    {
+      "prompt": "Can you make something for my launch? I'm not sure what exactly.",
+      "expected_verb": "create",
+      "expected_slots": {"topic": "launch"},
+      "expected_gaps": ["artifact"],
+      "expected_flags": ["UNCERTAIN_USER"],
+      "notes": "Vague create prompt should detect missing artifact"
+    },
+    {
+      "prompt": "Turn it into a table.",
+      "expected_verb": "transform",
+      "expected_slots": {"target-form": "table"},
+      "expected_gaps": ["source"],
+      "expected_flags": [],
+      "notes": "Missing transform source should be flagged"
+    },
+    {
+      "prompt": "Should I stay freelance take the job or start an agency?",
+      "expected_verb": "decide",
+      "expected_slots": {"options": "stay freelance, take the job, start an agency"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Messy multi-option decision without clean separators"
+    },
+    {
+      "prompt": "Explain it for a non-technical audience.",
+      "expected_verb": "explain",
+      "expected_slots": {"audience": "non-technical audience"},
+      "expected_gaps": ["target"],
+      "expected_flags": [],
+      "notes": "Non-technical should not trigger technical/accessibility tension by itself"
+    },
+    {
+      "prompt": "Make this informal, not formal.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "this", "constraints": "informal, not formal"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Negated formal should not be treated as tone tension"
+    },
+    {
+      "prompt": "Give me the shortcomings of this plan.",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "this plan", "criteria": "shortcomings"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Substring short in shortcomings should not trigger brevity"
+    },
+    {
+      "prompt": "Keep going, but make it more formal.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "current answer", "constraints": "more formal"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Continuation with a new constraint should activate transform"
+    },
+    {
+      "prompt": "Write an example component after you explain the concept.",
+      "expected_verb": "create",
+      "expected_slots": {"artifact": "example component"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Reversed compound priority: first requested action is create"
+    },
+    {
+      "prompt": "I don't know the right words, but my app flashes then freezes.",
+      "expected_verb": "fix",
+      "expected_slots": {"target": "app", "symptoms": "flashes then freezes"},
+      "expected_gaps": [],
+      "expected_flags": ["UNCERTAIN_USER"],
+      "notes": "Uncertain user with symptoms should map to fix"
+    },
+    {
+      "prompt": "Could you analize this survey? sorry, typo.",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "this survey"},
+      "expected_gaps": [],
+      "expected_flags": ["UNCERTAIN_USER", "IMPERFECT_TEXT"],
+      "notes": "Common typo should still classify"
+    },
+    {
+      "prompt": "I need legal advice on this contract.",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "this contract", "criteria": "legal"},
+      "expected_gaps": [],
+      "expected_flags": ["HIGH_STAKES_USER"],
+      "notes": "High-stakes prompts still scaffold but should preserve caution"
+    },
+    {
+      "prompt": "Make a super creative but strictly factual bio.",
+      "expected_verb": "create",
+      "expected_slots": {"artifact": "bio", "style": "creative but strictly factual"},
+      "expected_gaps": [],
+      "expected_flags": ["STYLE_TENSION"],
+      "notes": "Creative versus factual tension"
+    },
+    {
+      "prompt": "Explain the whole thing in one sentence but include every detail.",
+      "expected_verb": "explain",
+      "expected_slots": {"target": "the whole thing", "depth": "one sentence but every detail"},
+      "expected_gaps": [],
+      "expected_flags": ["BREVITY_DEPTH_TENSION"],
+      "notes": "One sentence plus every detail creates brevity-depth tension"
+    },
+    {
+      "prompt": "What should I do?",
+      "expected_verb": "decide",
+      "expected_slots": {},
+      "expected_gaps": ["options"],
+      "expected_flags": [],
+      "notes": "Decision request with no options should ask for options"
+    },
+    {
+      "prompt": "This is a mess and I'm overwhelmed; help me organize the migration.",
+      "expected_verb": "plan",
+      "expected_slots": {"goal": "organize the migration"},
+      "expected_gaps": [],
+      "expected_flags": ["OVERWHELMED_USER"],
+      "notes": "Overwhelmed user should receive low-friction planning"
+    },
+    {
+      "prompt": "Review this API contract for edge cases and invariants.",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "this API contract", "criteria": "edge cases and invariants"},
+      "expected_gaps": [],
+      "expected_flags": ["EXPERT_USER"],
+      "notes": "Expert markers should preserve precision"
+    },
+    {
+      "prompt": "Just handle this, you decide the best structure.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "this", "target-form": "best structure"},
+      "expected_gaps": [],
+      "expected_flags": ["DELEGATING_USER"],
+      "notes": "Delegating user asks agent to choose structure"
+    },
+    {
+      "prompt": "Hey, quick question.",
+      "expected_verb": null,
+      "expected_slots": {},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Greeting without task should pass through"
+    },
+    {
+      "prompt": "Explainn OAuth like I'm five.",
+      "expected_verb": "explain",
+      "expected_slots": {"target": "OAuth", "audience": "like I'm five"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Typo in verb should still infer explain from audience marker"
+    },
+    {
+      "prompt": "Can you compare these two pricing pages and tell me which is better?",
+      "expected_verb": "decide",
+      "expected_slots": {"options": "two pricing pages", "criteria": "which is better"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Compare plus better should become decide"
+    },
+    {
+      "prompt": "Summarize below as bullets without adding anything.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "below", "target-form": "bullets", "constraints": "without adding anything"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Transform with preservation constraint"
+    },
+    {
+      "prompt": "Make this accessible but keep the precise terminology.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "this", "constraints": "accessible but precise terminology"},
+      "expected_gaps": [],
+      "expected_flags": ["LANGUAGE_TENSION"],
+      "notes": "Accessible versus precise terminology should flag language tension"
+    },
+    {
+      "prompt": "Plan, or maybe decide, whether we should rebuild the dashboard.",
+      "expected_verb": "decide",
+      "expected_slots": {"options": "rebuild the dashboard or not"},
+      "expected_gaps": [],
+      "expected_flags": ["UNCERTAIN_USER"],
+      "notes": "Slot values imply decide despite explicit plan"
+    },
+    {
+      "prompt": "Fix my resume.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "resume"},
+      "expected_gaps": ["target-form"],
+      "expected_flags": [],
+      "notes": "Everyday fix my resume means transform/edit, not debug"
+    },
+    {
+      "prompt": "Why is my invoice total wrong?",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "invoice total", "criteria": "wrong"},
+      "expected_gaps": [],
+      "expected_flags": [],
+      "notes": "Wrong result without repair context can be analysis"
+    },
+    {
+      "prompt": "Need a simple but detailed onboarding checklist.",
+      "expected_verb": "create",
+      "expected_slots": {"artifact": "onboarding checklist", "constraints": "simple but detailed"},
+      "expected_gaps": [],
+      "expected_flags": ["SIMPLICITY_DEPTH_TENSION"],
+      "notes": "Simple plus detailed tension"
+    },
+    {
+      "prompt": "Give a general overview with specific implementation steps.",
+      "expected_verb": "explain",
+      "expected_slots": {"target": "implementation steps", "depth": "general overview with specific steps"},
+      "expected_gaps": [],
+      "expected_flags": ["SCOPE_TENSION"],
+      "notes": "General overview plus specific steps creates scope tension"
+    },
+    {
+      "prompt": "I have voice notes, rough and rambling. Turn them into a clean outline.",
+      "expected_verb": "transform",
+      "expected_slots": {"source": "voice notes", "target-form": "clean outline"},
+      "expected_gaps": [],
+      "expected_flags": ["IMPERFECT_TEXT"],
+      "notes": "Messy source should be accepted without asking the user to clean it"
+    },
+    {
+      "prompt": "Is this tax plan okay?",
+      "expected_verb": "analyze",
+      "expected_slots": {"target": "this tax plan"},
+      "expected_gaps": [],
+      "expected_flags": ["HIGH_STAKES_USER"],
+      "notes": "Tax prompt is high stakes and should scaffold cautiously"
+    },
+    {
+      "prompt": "Make it better.",
+      "expected_verb": "transform",
+      "expected_slots": {},
+      "expected_gaps": ["source", "target-form"],
+      "expected_flags": [],
+      "notes": "Too vague to transform without source and target form"
+    }
+  ]
+}

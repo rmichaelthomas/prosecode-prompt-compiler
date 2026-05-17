@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "purpose": "Human variation markers that help the agent choose how gently to infer, clarify, or respond. These markers are not labels for intelligence.",
+  "patterns": [
+    {
+      "name": "UNCERTAIN_USER",
+      "markers": ["not sure", "i don't know", "maybe", "kind of", "something like", "i think", "probably", "sorry"],
+      "response_guidance": "Infer conservatively, state assumptions lightly, and offer a concrete next step."
+    },
+    {
+      "name": "OVERWHELMED_USER",
+      "markers": ["overwhelmed", "confused", "lost", "stuck", "panic", "frustrated", "this is a mess", "i'm new"],
+      "response_guidance": "Reduce cognitive load, use short sections, and prioritize the first useful action."
+    },
+    {
+      "name": "EXPERT_USER",
+      "markers": ["architecture", "edge case", "tradeoff", "benchmark", "regression", "invariant", "schema", "api contract"],
+      "response_guidance": "Keep precision, expose meaningful tradeoffs, and avoid over-explaining basics."
+    },
+    {
+      "name": "DELEGATING_USER",
+      "markers": ["handle this", "just do it", "take care of", "you decide", "make it good", "ship it"],
+      "response_guidance": "Choose reasonable defaults, proceed when safe, and summarize decisions after acting."
+    },
+    {
+      "name": "HIGH_STAKES_USER",
+      "markers": ["legal", "medical", "financial", "tax", "contract", "lawsuit", "diagnosis", "investment"],
+      "response_guidance": "Scaffold the request but preserve caution, limitations, and source-sensitive reasoning."
+    },
+    {
+      "name": "IMPERFECT_TEXT",
+      "markers": ["typo", "rough", "messy", "drafty", "half-baked", "rambling", "voice notes", "bad prompt"],
+      "response_guidance": "Preserve intent over wording. Do not make the user clean up the prompt unless ambiguity blocks progress."
+    }
+  ]
+}

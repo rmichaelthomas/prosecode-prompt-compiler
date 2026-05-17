@@ -5,8 +5,8 @@
     {
       "name": "BREVITY_DEPTH_TENSION",
       "description": "Request contains both brevity and comprehensiveness constraints.",
-      "markers_a": ["brief", "short", "concise", "quick", "summary"],
-      "markers_b": ["comprehensive", "thorough", "detailed", "exhaustive", "complete", "in-depth"],
+      "markers_a": ["brief", "short", "concise", "quick", "summary", "one sentence"],
+      "markers_b": ["comprehensive", "thorough", "detailed", "exhaustive", "complete", "in-depth", "every detail"],
       "reason": "Brevity and comprehensiveness are in tension. The agent should note the tradeoff and choose the interpretation most consistent with the verb and audience."
     },
     {
@@ -19,7 +19,7 @@
     {
       "name": "AUDIENCE_TENSION",
       "description": "Request names both beginner and advanced audiences.",
-      "markers_a": ["beginner", "like i'm five", "like i'm 5", "non-technical", "new to this", "novice"],
+      "markers_a": ["beginner", "beginners", "like i'm five", "like i'm 5", "non-technical", "new to this", "novice"],
       "markers_b": ["advanced", "expert", "technical audience", "specialist", "senior", "professional"],
       "reason": "Beginner and advanced audiences need different assumptions. The agent should pick one primary audience or layer the response."
     },

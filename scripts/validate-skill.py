@@ -101,7 +101,9 @@ def main() -> int:
     signatures = json_data.get("verb-signatures.json", {})
     markers = json_data.get("phrase-markers.json", {})
     tests = json_data.get("test-prompts.json", {})
+    adversarial_tests = json_data.get("adversarial-test-prompts.json", {})
     contradictions = json_data.get("contradiction-rules.json", {})
+    human_patterns = json_data.get("human-prompt-patterns.json", {})
 
     verbs = signatures.get("verbs", []) if isinstance(signatures, dict) else []
     verb_words = {v.get("word") for v in verbs if isinstance(v, dict)}
@@ -123,15 +125,20 @@ def main() -> int:
 
     test_items = tests.get("tests", []) if isinstance(tests, dict) else []
     checks.append(report("24 test prompts", len(test_items) == 24, f"{len(test_items)} found"))
+    adversarial_items = adversarial_tests.get("tests", []) if isinstance(adversarial_tests, dict) else []
+    checks.append(report("32 adversarial test prompts", len(adversarial_items) == 32, f"{len(adversarial_items)} found"))
+    all_test_items = test_items + adversarial_items
     unknown_expected = sorted({
         item.get("expected_verb")
-        for item in test_items
+        for item in all_test_items
         if item.get("expected_verb") is not None and item.get("expected_verb") not in verb_words
     })
     checks.append(report("expected verbs exist", not unknown_expected, f"unknown={unknown_expected}"))
 
     rules = contradictions.get("rules", []) if isinstance(contradictions, dict) else []
     checks.append(report("8+ contradiction rules", len(rules) >= 8, f"{len(rules)} found"))
+    patterns = human_patterns.get("patterns", []) if isinstance(human_patterns, dict) else []
+    checks.append(report("6+ human prompt patterns", len(patterns) >= 6, f"{len(patterns)} found"))
 
     print()
     if all(checks):

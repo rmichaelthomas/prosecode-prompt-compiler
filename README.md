@@ -27,11 +27,16 @@ prompt-reformatter/
 │   ├── verb-signatures.json
 │   ├── phrase-markers.json
 │   ├── contradiction-rules.json
+│   ├── human-prompt-patterns.json
 │   └── DESIGN_PROVENANCE.md
 ├── assets/
-│   └── test-prompts.json
+│   ├── test-prompts.json
+│   ├── adversarial-test-prompts.json
+│   └── live-eval-results.json
 └── scripts/
-    └── validate-skill.py
+    ├── validate-skill.py
+    ├── benchmark-prompts.py
+    └── install-check.py
 ```
 
 ## Provenance
@@ -74,8 +79,15 @@ Current suites:
 
 - `assets/test-prompts.json`: canonical coverage for the seven intent verbs, compounds, contradictions, and pass-through prompts.
 - `assets/adversarial-test-prompts.json`: messy human prompts with uncertainty, typos, vague asks, false-positive substring traps, high-stakes contexts, and reversed priorities.
+- `assets/live-eval-results.json`: pre-install response-behavior review for ten messy prompts.
 
 ## Installation
+
+Before installing, run:
+
+```bash
+python3 scripts/install-check.py
+```
 
 Copy the `prompt-reformatter` folder into a skills directory supported by your agent environment.
 

@@ -1,0 +1,73 @@
+{
+  "schema_version": "0.1.0",
+  "suite": "preinstall-live-response-eval",
+  "purpose": "Manual agent-in-the-loop evaluation of response behavior, not only table classification.",
+  "results": [
+    {
+      "prompt": "I don't know the right words, but my app flashes then freezes.",
+      "internal_read": {"verb": "fix", "flags": ["UNCERTAIN_USER"], "slots": ["target", "symptoms"]},
+      "expected_response_behavior": "Start with reassurance, ask for environment/logs only if needed, and provide first debugging steps.",
+      "result": "pass"
+    },
+    {
+      "prompt": "Make it better.",
+      "internal_read": {"verb": "transform", "gaps": ["source", "target-form"]},
+      "expected_response_behavior": "Ask one focused clarifying question instead of pretending the source and desired change are known.",
+      "result": "pass"
+    },
+    {
+      "prompt": "Review this API contract for edge cases and invariants.",
+      "internal_read": {"verb": "analyze", "flags": ["EXPERT_USER"], "slots": ["target", "criteria"]},
+      "expected_response_behavior": "Use precise language, keep the analysis structured, and avoid explaining basic API concepts.",
+      "result": "pass"
+    },
+    {
+      "prompt": "Can you make something for my launch? I'm not sure what exactly.",
+      "internal_read": {"verb": "create", "flags": ["UNCERTAIN_USER"], "gaps": ["artifact"]},
+      "expected_response_behavior": "Offer two or three concrete artifact options and ask the user to choose one.",
+      "result": "pass"
+    },
+    {
+      "prompt": "Explain the whole thing in one sentence but include every detail.",
+      "internal_read": {"verb": "explain", "flags": ["BREVITY_DEPTH_TENSION"], "slots": ["target", "depth"]},
+      "expected_response_behavior": "Name the tension briefly and choose a compact overview with an option to expand.",
+      "result": "pass"
+    },
+    {
+      "prompt": "Is this tax plan okay?",
+      "internal_read": {"verb": "analyze", "flags": ["HIGH_STAKES_USER"], "slots": ["target"]},
+      "expected_response_behavior": "Avoid definitive legal or tax advice, ask for context, and recommend professional review for decisions.",
+      "result": "pass"
+    },
+    {
+      "prompt": "Keep going, but make it more formal.",
+      "internal_read": {"verb": "transform", "slots": ["source", "constraints"]},
+      "expected_response_behavior": "Continue from prior context while applying the new formality constraint.",
+      "result": "pass"
+    },
+    {
+      "prompt": "Fix my resume.",
+      "internal_read": {"verb": "transform", "gaps": ["target-form"], "slots": ["source"]},
+      "expected_response_behavior": "Treat 'fix' as editing, not debugging; ask whether the goal is clarity, role fit, formatting, or impact.",
+      "result": "pass"
+    },
+    {
+      "prompt": "This is a mess and I'm overwhelmed; help me organize the migration.",
+      "internal_read": {"verb": "plan", "flags": ["OVERWHELMED_USER"], "slots": ["goal"]},
+      "expected_response_behavior": "Reduce cognitive load and give a small first-step plan before deeper structure.",
+      "result": "pass"
+    },
+    {
+      "prompt": "Make this informal, not formal.",
+      "internal_read": {"verb": "transform", "slots": ["source", "constraints"]},
+      "expected_response_behavior": "Respect the negation and avoid flagging casual-versus-formal tension.",
+      "result": "pass"
+    }
+  ],
+  "summary": {
+    "cases": 10,
+    "passes": 10,
+    "failures": 0,
+    "learning": "The installed skill should improve response posture by treating messy prompts as context for calibration, not as user failure."
+  }
+}

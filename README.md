@@ -4,6 +4,8 @@
 
 The user never sees the scaffold. They just get a clearer, better-targeted response.
 
+The skill is intentionally token-conscious: `SKILL.md` stays compact, detailed tables live in references, and the internal scaffold is meant to be small enough to reduce wasted output rather than add overhead.
+
 ## Intent Verbs
 
 The skill uses seven intent verbs:

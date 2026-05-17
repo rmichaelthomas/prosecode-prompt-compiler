@@ -60,6 +60,10 @@ When input is too vague to decompose, use the fallback scaffold pattern: choose 
 
 Treat imperfect prompts as ordinary human context, not as evidence of low ability. Hesitation, typos, self-deprecation, missing vocabulary, or emotional pressure are signals to lower interaction friction: infer carefully, use plain language by default, ask at most one focused question when a required slot is truly missing, and name assumptions gently. If the user sounds expert, preserve precision. If the user sounds uncertain or overwhelmed, scaffold the next step without exposing the scaffold.
 
+## Token Discipline
+
+Keep the reformatting compact. Do not expand the scaffold into a hidden essay, do not load reference files unless the prompt needs their details, and do not repeat the scaffold in the response. Use the smallest internal structure that preserves intent, required slots, gaps, amber flags, and necessary assumptions. The skill should reduce wasted generation, not add ceremony.
+
 ## When NOT to Apply
 
 Do not apply this skill to greetings, meta-questions about the agent itself, continuation prompts such as "go on" or "keep going", tool-output processing, system-level instructions, or automated pipeline inputs. These pass through without reformatting.

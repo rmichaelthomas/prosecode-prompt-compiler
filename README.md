@@ -2,6 +2,8 @@
 
 Turns a messy prompt into a clean instruction before the agent answers.
 
+*Part of the Prosecode family — a set of tools for writing, verifying, and transferring structured reasoning.*
+
 It maps natural-language requests into a small verb-and-slot scaffold, flags missing information and contradictions, and lets the agent generate from the structured form rather than the raw words. The user never sees the scaffold. They just get a better-targeted response.
 
 ## What it does
@@ -31,9 +33,9 @@ posture: investigative; user has not yet shared logs or code
 
 The agent now knows it has two requests (analyze, then rewrite), what the symptom signature is, and that it should ask for logs before guessing.
 
-## Part of the Liminate family
+## Built by Liminate
 
-Liminate is a prose-as-syntax programming language where plain English sentences execute directly. These five repos form a system for writing, verifying, and transferring structured reasoning.
+Liminate is a prose-as-syntax language where plain English sentences execute directly. These five repos form a system for writing, verifying, and transferring structured reasoning.
 
 | | Repo | What it does |
 |---|---|---|
